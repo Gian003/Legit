@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:legit/screens/on_boarding_screen.dart';
+import 'package:legit/screens/pitch_demo_screen.dart';
 import 'package:legit/screens/scanner_screen.dart';
-
-import 'screens/splash_screen.dart';
+import 'package:legit/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/onBoarding': (context) => const OnBoardingScreen(),
         '/scanner': (context) => const ScannerScreen(),
+        '/pitch': (context) => const PitchDemoScreen(),
       },
     );
   }

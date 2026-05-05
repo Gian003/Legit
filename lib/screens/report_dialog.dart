@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product_model.dart';
+import 'package:legit/models/product_model.dart';
 
 class ReportDialog extends StatefulWidget {
   final Product product;
