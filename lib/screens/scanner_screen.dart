@@ -91,93 +91,59 @@ class _ScannerScreenState extends State<ScannerScreen> {
             ),
           Positioned(
             bottom: kDebugMode ? 150 : 50,
-            left: 0,
-            right: 0,
-            child: const Text(
-              'Point camera at product barcode or label',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white70, fontSize: 14),
+            left: 50,
+            child: Row(
+              children: [
+                FutureBuilder<bool>(
+                  future: PremiumService.isPremium(),
+                  builder: (context, snapshot) {
+                    final isPremium = snapshot.data ?? false;
+                    return FloatingActionButton.small(
+                      heroTag: 'gallery',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _handleGalleryScan(isPremium),
+                      child: const Icon(
+                        Icons.photo_library_outlined,
+                        color: Colors.black,
+                      ),
+                    );
+                  },
+                ),
+
+                const SizedBox(width: 10),
+
+                const Text(
+                  'Point camera at product barcode or label',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),   
+              ],
             ),
           ),
 
-          Positioned(
-            bottom: kDebugMode ? 135 : 50,
-            left: 10,
-            child: FutureBuilder<bool>(
-              future: PremiumService.isPremium(),
-              builder: (context, snapshot) {
-                final isPremium = snapshot.data ?? false;
-                return FloatingActionButton.small(
-                  heroTag: 'gallery',
-                  backgroundColor: Colors.white,
-                  onPressed: () => _handleGalleryScan(isPremium),
-                  child: const Icon(
-                    Icons.photo_library_outlined,
-                    color: Colors.black,
-                  ),
-                );
-              },
-            ),
-          ),
-
-          if (kDebugMode) _buildDebugBar(),
+          // Positioned(
+          //   bottom: kDebugMode ? 135 : 50,
+          //   left: 10,
+          //   child: FutureBuilder<bool>(
+          //     future: PremiumService.isPremium(),
+          //     builder: (context, snapshot) {
+          //       final isPremium = snapshot.data ?? false;
+          //       return FloatingActionButton.small(
+          //         heroTag: 'gallery',
+          //         backgroundColor: Colors.white,
+          //         onPressed: () => _handleGalleryScan(isPremium),
+          //         child: const Icon(
+          //           Icons.photo_library_outlined,
+          //           color: Colors.black,
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );
   }
-
-  Widget _buildDebugBar() {
-    final testBarcodes = {
-      'Real Product': '3017620422003',
-      'Fake': '8850329088888',
-      'Smuggled': '8850329077777',
-      'Not Found': '0000000000000',
-    };
-
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        color: Colors.black87,
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'DEBUG',
-              style: TextStyle(color: Colors.yellow, fontSize: 11),
-            ),
-            const SizedBox(height: 4),
-            Wrap(
-              spacing: 6,
-              runSpacing: 4,
-              children: testBarcodes.entries.map((e) {
-                return ElevatedButton(
-                  onPressed: () => _handleBarcode(e.value),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    backgroundColor: Colors.white12,
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  child: Text(
-                    e.key,
-                    style: const TextStyle(fontSize: 11, color: Colors.white),
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Future<void> _onBarcodeDetected(BarcodeCapture capture) async {
     final barcode = capture.barcodes.firstOrNull?.rawValue;
     if (barcode == null) return;

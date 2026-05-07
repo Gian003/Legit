@@ -38,16 +38,6 @@ class ResultScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back, size: 16),
         ),
-        actions: [
-          TextButton.icon(
-            onPressed: () => showDialog(
-              context: context,
-              builder: (_) => ReportDialog(product: product),
-            ),
-            icon: const Icon(Icons.flag_outlined, size: 16),
-            label: const Text('Report'),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(

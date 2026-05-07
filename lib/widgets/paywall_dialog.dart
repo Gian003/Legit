@@ -41,10 +41,10 @@ class PaywallDialog extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                _FeatureRow('📷', 'Scan from Gallery',      true),
-                _FeatureRow('∞',  'Unlimited daily scans',  true),
-                _FeatureRow('📋', 'Full scan history',       true),
-                _FeatureRow('📄', 'Export PDF reports',      true),
+                _FeatureRow('Scan from Gallery',      true),
+                _FeatureRow('Unlimited daily scans',  true),
+                _FeatureRow('Full scan history',       true),
+                _FeatureRow('Export PDF reports',      true),
                 const SizedBox(height: 16),
                 const Text('₱99 / month',
                     style: TextStyle(
@@ -86,9 +86,9 @@ class PaywallDialog extends StatelessWidget {
 }
 
 class _FeatureRow extends StatelessWidget {
-  final String icon, label;
+  final String label;
   final bool included;
-  const _FeatureRow(this.icon, this.label, this.included);
+  const _FeatureRow(this.label, this.included);
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +96,6 @@ class _FeatureRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Text(icon, style: const TextStyle(fontSize: 18)),
-          const SizedBox(width: 12),
           Expanded(child: Text(label)),
           Icon(
             included ? Icons.check_circle : Icons.cancel,

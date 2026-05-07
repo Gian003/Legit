@@ -13,7 +13,6 @@ class PitchDemoScreen extends StatelessWidget {
       'title': 'Scan a Legit Product',
       'subtitle': 'Century Tuna — FDA Verified',
       'barcode': '8850329012345',
-      'emoji': '✅',
       'color': Color(0xFF22C55E),
     },
     {
@@ -21,7 +20,6 @@ class PitchDemoScreen extends StatelessWidget {
       'title': 'Scan a Fake Product',
       'subtitle': 'FakeVit — Not in FDA Registry',
       'barcode': '8850329088888',
-      'emoji': '❌',
       'color': Color(0xFFEF4444),
     },
     {
@@ -29,16 +27,7 @@ class PitchDemoScreen extends StatelessWidget {
       'title': 'Scan a Smuggled Item',
       'subtitle': 'Whisky — Flagged by Customs',
       'barcode': '8850329077777',
-      'emoji': '🚫',
       'color': Color(0xFF8B5CF6),
-    },
-    {
-      'label': 'Scene 4',
-      'title': 'Scan an Expired Product',
-      'subtitle': 'Bear Brand — Expired Mar 2023',
-      'barcode': '8850329099999',
-      'emoji': '⚠️',
-      'color': Color(0xFFF97316),
     },
   ];
 
@@ -242,11 +231,6 @@ class _SceneCard extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-
-            Text(
-              scene['emoji'] as String,
-              style: const TextStyle(fontSize: 28),
             ),
           ],
         ),

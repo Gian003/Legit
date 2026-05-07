@@ -53,7 +53,6 @@ class Product {
         .take(3)
         .toList();
 
-    // Determine status based on real data signals
     final status = _determineStatus(product, barcode);
 
     return Product(
